@@ -1,0 +1,34 @@
+.detail__container {
+    display: flex;
+    height: 100%;
+    padding: 15px;
+}
+
+.detail__poster {
+    width: 35%;
+    height: 100%;
+}
+
+.detail__overview {
+    width: 100%;
+    padding:10px 15px;
+}
+
+.detail__tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie__tags {
+    margin: 10px;
+    padding:5px 10px;
+    border-radius: 15px;
+    background-color: #032541;
+    color:white;
+    font-weight: 800;
+}
+
+.movie__status {
+    padding: 5px 10px;
+    font-weight: 800;
+}
