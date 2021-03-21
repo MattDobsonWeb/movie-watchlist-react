@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
-export const MovieControls = ({ type, movie }) => {
+export const MovieControls = ({ type, movie, detail }) => {
   const {
     removeMovieFromWatchlist,
     addMovieToWatched,
@@ -15,6 +15,10 @@ export const MovieControls = ({ type, movie }) => {
         <>
           <button className="ctrl-btn" onClick={() => addMovieToWatched(movie)}>
             <i className="fa-fw far fa-eye"></i>
+          </button>
+
+          <button className="ctrl-btn" onClick={() => detail(movie.id)}>
+            <i className="fas fa-info"></i>
           </button>
 
           <button
