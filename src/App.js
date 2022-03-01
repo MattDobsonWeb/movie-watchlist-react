@@ -14,7 +14,6 @@ function App() {
     <GlobalProvider>
       <Router>
         <Header />
-
         <Switch>
           <Route exact path="/">
             <Watchlist />
