@@ -1,9 +1,9 @@
 import React from "react";
 import { MovieControls } from "./MovieControls";
 
-export const MovieCard = ({ movie, type }) => {
+export const MovieCard = ({ movie }) => {
   return (
-    <div className="movie-card">
+    <div className={`movie-card ${movie.watched ? "watched" : ""}`}>
       <div className="overlay"></div>
 
       <img
@@ -11,7 +11,19 @@ export const MovieCard = ({ movie, type }) => {
         alt={`${movie.title} Poster`}
       />
 
-      <MovieControls type={type} movie={movie} />
+      {movie.watched && (
+        <div className="watched-badge">
+          <i className="fa fa-check"></i> Watched
+        </div>
+      )}
+
+      {movie.rating && (
+        <div className="rating-badge">
+          <i className="fa fa-star"></i> {movie.rating}
+        </div>
+      )}
+
+      <MovieControls movie={movie} />
     </div>
   );
 };
