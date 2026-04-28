@@ -3,11 +3,8 @@ import AppReducer from "./AppReducer";
 
 // initial state
 const initialState = {
-  watchlist: localStorage.getItem("watchlist")
-    ? JSON.parse(localStorage.getItem("watchlist"))
-    : [],
-  watched: localStorage.getItem("watched")
-    ? JSON.parse(localStorage.getItem("watched"))
+  movies: localStorage.getItem("movies")
+    ? JSON.parse(localStorage.getItem("movies"))
     : [],
 };
 
@@ -19,41 +16,39 @@ export const GlobalProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {
-    localStorage.setItem("watchlist", JSON.stringify(state.watchlist));
-    localStorage.setItem("watched", JSON.stringify(state.watched));
+    localStorage.setItem("movies", JSON.stringify(state.movies));
   }, [state]);
 
   // actions
   const addMovieToWatchlist = (movie) => {
-    dispatch({ type: "ADD_MOVIE_TO_WATCHLIST", payload: movie });
+    const movieWithStatus = {
+      ...movie,
+      watched: false,
+      rating: null,
+    };
+    dispatch({ type: "ADD_MOVIE_TO_WATCHLIST", payload: movieWithStatus });
   };
 
   const removeMovieFromWatchlist = (id) => {
     dispatch({ type: "REMOVE_MOVIE_FROM_WATCHLIST", payload: id });
   };
 
-  const addMovieToWatched = (movie) => {
-    dispatch({ type: "ADD_MOVIE_TO_WATCHED", payload: movie });
+  const toggleMovieWatched = (id) => {
+    dispatch({ type: "TOGGLE_MOVIE_WATCHED", payload: id });
   };
 
-  const moveToWatchlist = (movie) => {
-    dispatch({ type: "MOVE_TO_WATCHLIST", payload: movie });
-  };
-
-  const removeFromWatched = (id) => {
-    dispatch({ type: "REMOVE_FROM_WATCHED", payload: id });
+  const setMovieRating = (id, rating) => {
+    dispatch({ type: "SET_MOVIE_RATING", payload: { id, rating } });
   };
 
   return (
     <GlobalContext.Provider
       value={{
-        watchlist: state.watchlist,
-        watched: state.watched,
+        movies: state.movies,
         addMovieToWatchlist,
         removeMovieFromWatchlist,
-        addMovieToWatched,
-        moveToWatchlist,
-        removeFromWatched,
+        toggleMovieWatched,
+        setMovieRating,
       }}
     >
       {props.children}
