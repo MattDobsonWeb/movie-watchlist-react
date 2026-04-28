@@ -15,7 +15,11 @@ export default (state, action) => {
         ...state,
         movies: state.movies.map((movie) =>
           movie.id === action.payload
-            ? { ...movie, watched: !movie.watched }
+            ? { 
+                ...movie, 
+                watched: !movie.watched,
+                rating: movie.watched ? null : movie.rating
+              }
             : movie
         ),
       };
